@@ -1,30 +1,26 @@
 package co.edu.uniandes.dse.TallerPersistencia.entities;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import com.fasterxml.jackson.databind.JsonSerializable.Base;
-import uk.co.jemos.podam.common.PodamExclude;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
+import uk.co.jemos.podam.common.PodamExclude;
 
 @Data
 @Entity
 public class PeliculaEntity extends BaseEntity {
-    private  String titulo;
-    private String anioLanzamiento;
+
+    private String titulo;
+    private Integer anioLanzamiento;
+
+    @PodamExclude
+    @ManyToOne
+    private DirectorEntity director;
 
     @PodamExclude
     @ManyToMany
-    private List<ActorEntity> directores;
-    peliculas@PodamExclude
-
-
-    @OneToMany(mappedBy = "director", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<DirectoEntity> peliculas = new ArrayList<>();
-
-    @PodamExclude
-    @ManyToMany
-    private List<ActorEntity> actores= new ArrayList<>();
-
+    private List<ActorEntity> actores = new ArrayList<>();
 }
